@@ -46,6 +46,15 @@ h1
  
 }  */
 
+.red-ghost
+{
+  object-fit: scale-down;
+  object-position: center;
+  width: 40px;
+  height: auto;
+
+}
+
 .pac-man 
 {
   object-fit: scale-down;

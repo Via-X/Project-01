@@ -16,7 +16,7 @@ window.onload = function ()
 
   function startGame() 
   {
-    console.log("start game - script js");
+    // console.log("start game - script js");
     game = new Game();
     game.start();
 
@@ -46,17 +46,21 @@ window.onload = function ()
       switch (key) 
       {
         case "ArrowLeft":
-          console.log("Left Hit");
+          // console.log("Left Hit");
+          game.player.directionX = -1
           break;
         case "ArrowUp":
-          console.log("Up Hit");
+          // console.log("Up Hit");
+          game.player.directionY = -1 
           break;
         case "ArrowRight":
-          console.log("Right Hit");
+          // console.log("Right Hit");
+          game.player.directionX = 1;
           break;
         case "ArrowDown":
-          console.log("Down Hit");
-          game.endGame();
+          // console.log("Down Hit");
+          game.player.directionY = 1;
+          // game.endGame();
           break;
       }
     }
