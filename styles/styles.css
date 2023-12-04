@@ -25,26 +25,22 @@ h1
   position: absolute;
 }
 
+.map-dot-block 
+{
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  background-image: radial-gradient(yellow 10%, transparent 0);
+  position: absolute;
+} 
+
 .map-wall-block 
 {
   width: 40px;
   height: 40px;
-  /* background-color: black; */
   border: 2px solid grey;
   position: absolute;
 }
-
-/* .map-dot-block {
-  width: 15px; 
-  height: 15px; 
-  background-color: yellow; 
-  border-radius: 30%; 
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(100%, 100%); 
- 
-}  */
 
 .red-ghost
 {

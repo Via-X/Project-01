@@ -1,4 +1,4 @@
-class Ghosts {
+class RedGhost {
   constructor(map, game) 
   {
     this.game = game;
@@ -65,7 +65,10 @@ class Ghosts {
     {
       case -1:
         // console.log("Move Left - Ghost");
-        if(this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 0)
+        if(this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 0 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 1 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 6 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 9)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -89,7 +92,10 @@ class Ghosts {
         break;
       case 1:
         // console.log("Move Right - GhostJS");
-        if(this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 0)
+        if(this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 0 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 1 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 6 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 9)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -116,7 +122,10 @@ class Ghosts {
     {
       case -1:
         // console.log("Move UP - GhostJS");
-        if(this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 0)
+        if(this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 0 || 
+          this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 1 || 
+          this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 6 || 
+          this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 9)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -140,7 +149,10 @@ class Ghosts {
         break;
       case 1:
         // console.log("Move Down - GhostJS");
-        if(this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 0)
+        if(this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 0 || 
+          this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 1 || 
+          this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 6 || 
+          this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 9)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -276,7 +288,14 @@ class Ghosts {
     
     if(this.prevPosition)
     {
+      // if(this.map[this.prevPosition[0]][this.prevPosition[1]] === 1)
+      // {
+      //   this.map[this.prevPosition[0]][this.prevPosition[1]] = 1;
+      // }
+      // else 
+      // {
        this.map[this.prevPosition[0]][this.prevPosition[1]] = 0;
+      // }
        const removeGhost = document.getElementById(`${this.prevPosition[0]}-${this.prevPosition[1]}`);
        const image = removeGhost.querySelector('img');
       //  console.log(removeGhost);

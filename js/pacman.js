@@ -20,7 +20,7 @@ class Player {
     {
       case -1:
         // console.log("Move Left - Pacman");
-        if(this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 0)
+        if(this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 0 || this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 1)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -28,6 +28,7 @@ class Player {
           // this.projectedPosition[0] = this.currentPosition[0];
           // this.projectedPosition[1] = this.currentPosition[1] -1;
           // console.log(this.currentPosition + "MOVE PACEMANJS");
+          
           if(this.didCollide())
           {
             console.log("PACMAN - COLLIDE");
@@ -35,6 +36,10 @@ class Player {
             // return true;
           } else 
           {
+            if(this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 1)
+            {
+              this.game.points += 1;
+            }
             // this.prevPosition = [...this.currentPosition];
             this.currentPosition[1] = this.currentPosition[1] -1;
             this.updatePosition();
@@ -44,7 +49,7 @@ class Player {
         break;
       case 1:
         // console.log("Move Right - Pacman");
-        if(this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 0)
+        if(this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 0 || this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 1)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -59,6 +64,10 @@ class Player {
             // return true;
           } else 
           {
+            if(this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 1)
+            {
+              this.game.points += 1;
+            }
             // this.prevPosition = [...this.currentPosition];
             this.currentPosition[1] = this.currentPosition[1] + 1;
             this.updatePosition();
@@ -72,7 +81,7 @@ class Player {
     {
       case -1:
         // console.log("Move UP - Pacman");
-        if(this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 0)
+        if(this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 0 || this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 1)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -87,6 +96,10 @@ class Player {
             // return true;
           } else 
           {
+            if(this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 1)
+            {
+              this.game.points += 1;
+            }
             // this.prevPosition = [...this.currentPosition];
             this.currentPosition[0] = this.currentPosition[0] -1;
             this.updatePosition();
@@ -97,7 +110,7 @@ class Player {
         break;
       case 1:
         // console.log("Move Down - Pacman");
-        if(this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 0)
+        if(this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 0 || this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 1)
         {
           this.directionX = 0;
           this.directionY = 0;
@@ -112,6 +125,10 @@ class Player {
             // return true;
           } else 
           {
+            if(this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 1)
+            {
+              this.game.points += 1;
+            }
             // this.prevPosition = [...this.currentPosition];
             this.currentPosition[0] = this.currentPosition[0] + 1;
             this.updatePosition();
@@ -297,12 +314,11 @@ class Player {
     {
        this.map[this.prevPosition[0]][this.prevPosition[1]] = 0;
        const removePac = document.getElementById(`${this.prevPosition[0]}-${this.prevPosition[1]}`);
+       removePac.classList.remove('map-dot-block');
        const image = removePac.querySelector('img');
-      //  console.log(removePac);
        removePac.removeChild(image);
 
-
-
+       console.log("Total Points Earned " + this.game.points);
     }
     this.prevPosition = [...this.currentPosition];
   }

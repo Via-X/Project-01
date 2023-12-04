@@ -3,12 +3,13 @@ class Game
   constructor() {
     this.map = new CreateMap();
     this.player = null;
-    this.ghost = null;
-    // this.playerPosition = [19,10];
-    // this.ghostPosition = [10,10];
+    this.redGhost = null;
+    this.blueGhost = null;
+    this.orangeGhost = null;
     this.score = 0;
     this.lives = 3;
     this.gameIsOver = false;
+    this.points = 0;
 
   };
 
@@ -21,8 +22,14 @@ class Game
     
 
     //Create ghost
-    this.ghost = new Ghosts(this.map.getMap(), this);
-    this.ghost.updatePosition();
+    this.redGhost = new RedGhost(this.map.getMap(), this);
+    this.redGhost.updatePosition();
+
+    this.blueGhost = new BlueGhost(this.map.getMap(), this);
+    this.blueGhost.updatePosition();
+
+    this.orangeGhost = new OrangeGhost(this.map.getMap(), this);
+    this.orangeGhost.updatePosition();
     // setInterval(, 1);
 
 
@@ -33,8 +40,6 @@ class Game
   gameLoop() 
   {
     // console.log("GAMELOOP - GAMEJS");
-   
-      
     if (this.gameIsOver) 
     {
       return;
@@ -49,23 +54,21 @@ class Game
 
   update() 
   {
-    // if(this.player.didCollide())
-    // {
-      
-    //   this.reset();
-    // };
-
     this.player.move();
     //Crea a new Ghost
 
-    this.ghost.generateGhostMove();
-    //Check for collision 
-
-   
+    this.redGhost.generateGhostMove();
 
     //if lives are 0
     if(this.lives === 0)
     {
+      this.endGame();
+    }
+
+    this.map.searchMap();
+    if(this.map.gameWon === 1)
+    {
+      console.log("YOU WON!");
       this.endGame();
     }
    
@@ -75,20 +78,17 @@ class Game
   {
     this.lives --;
     console.log("COLLIDED - Lives left: " + this.lives);
-    this.ghost.collide = false;
-    // this.ghost.directionX = 0;
-    // this.ghost.directionY = 0;
+    this.redGhost.collide = false;
     this.player.collide = false;
-    // this.player.directionX = 0;
-    // this.player.directionY = 0;
-    console.log("PacMan PreCords" + this.player.prevPosition);
-    console.log("PacMan Cords" + this.player.currentPosition);
-    console.log("Ghost PreCords" + this.ghost.prevPosition);
-    console.log("Ghost Cords" + this.ghost.currentPosition);
+    // console.log("PacMan PreCords" + this.player.prevPosition);
+    // console.log("PacMan Cords" + this.player.currentPosition);
+    // console.log("Ghost PreCords" + this.redGhost.prevPosition);
+    // console.log("Ghost Cords" + this.redGhost.currentPosition);
     this.player.currentPosition = [19,10];
-    this.ghost.currentPosition = [10,10];
+    this.redGhost.currentPosition = [10,10];
     this.player.updatePosition();
-    this.ghost.updatePosition();
+    this.redGhost.updatePosition();
+  
 
   }
 
@@ -96,6 +96,7 @@ class Game
   endGame() 
   {
     this.gameIsOver = true;
+    console.log(this.map);
   }
 }
 
