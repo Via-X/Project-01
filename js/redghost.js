@@ -288,17 +288,19 @@ class RedGhost {
     
     if(this.prevPosition)
     {
-      // if(this.map[this.prevPosition[0]][this.prevPosition[1]] === 1)
-      // {
-      //   this.map[this.prevPosition[0]][this.prevPosition[1]] = 1;
-      // }
-      // else 
-      // {
-       this.map[this.prevPosition[0]][this.prevPosition[1]] = 0;
-      // }
+
+       
+    
        const removeGhost = document.getElementById(`${this.prevPosition[0]}-${this.prevPosition[1]}`);
        const image = removeGhost.querySelector('img');
-      //  console.log(removeGhost);
+      
+       if (removeGhost.classList.contains("map-dot-block"))
+       {
+        this.map[this.prevPosition[0]][this.prevPosition[1]] = 1;
+       } else 
+       {
+        this.map[this.prevPosition[0]][this.prevPosition[1]] = 0;
+       }
        removeGhost.removeChild(image);
      
 
