@@ -196,7 +196,13 @@ class PinkGhost {
       console.log("PINK GHOST Collided Below");
       this.collidePacman = true;
     }
-
+      if(this.game.superPacman[1] && this.collidePacman)
+      {
+        this.game.playEatGhost();
+      }else 
+      {
+        this.game.playPacDeath();
+      }
     return this.collidePacman;
   }
 

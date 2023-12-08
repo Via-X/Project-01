@@ -75,9 +75,9 @@ body
 {
   display: felx;
   background-color: black;
+  color: white;
   justify-content: center;
   text-align: center;
-  border-color: white;
-  border: 3px solid;
+
 
 }

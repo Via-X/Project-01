@@ -196,7 +196,13 @@ class OrangeGhost {
       console.log("ORANGE GHOST Collided Below");
       this.collidePacman = true;
     }
-
+      if(this.game.superPacman[2] && this.collidePacman)
+      {
+        this.game.playEatGhost();
+      }else 
+      {
+        this.game.playPacDeath();
+      }
     return this.collidePacman;
   }
 

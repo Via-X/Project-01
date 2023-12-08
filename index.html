@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="styles/styles.css"/>
   </head>
   <body>
+      <audio id="beginning" preload="auto"><source src="./sounds/pacman_beginning.mg3" type="audio/mp3"> </audio>
+      <audio id="chomp" preload="auto"><source src="./sounds/pacman_chomp.mp3" type="audio/mp3"> </audio>
+      <audio id="death" preload="auto"><source src="./sounds/pacman_death.mp3" type="audio/mp3"> </audio>
+      <audio id="eatghost" preload="auto"><source src="./sounds/pacman_eatghost.mp3" type="audio/mp3"> </audio>
+      
       <h1>Pac-Man</h1>
       <div id="game-intro">
-        <p>Use the Up, Right, Down, and Left arrow keys to control Pac-Man!</p>
+        <!-- <p>Use the Up, Right, Down, and Left arrow keys to control Pac-Man!</p> -->
         <button id="start-button">Start Game</button>
+        <button id="restart-button">Restart Game</button>
       </div>
       <div id="map-container"></div>
   

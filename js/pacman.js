@@ -180,13 +180,13 @@ class Player {
       console.log("PAC Collided Below");
       this.collide = true;
     }
-
+    this.game.playPacDeath();
     return this.collide;
   }
 
   updatePosition() 
   {
- 
+    this.game.playChomp();
     this.map[this.currentPosition[0]][this.currentPosition[1]] = 2;
     const displayPac = document.getElementById(`${this.currentPosition[0]}-${this.currentPosition[1]}`);
     const image = document.createElement('img');

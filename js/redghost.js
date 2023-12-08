@@ -197,6 +197,13 @@ class RedGhost {
       this.collidePacman = true;
     }
 
+    if(this.game.superPacman[0] && this.collidePacman)
+    {
+      this.game.playEatGhost();
+    }else 
+    {
+     this.game.playPacDeath();
+    }      
     return this.collidePacman;
   }
 

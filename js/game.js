@@ -4,7 +4,7 @@ class Game
     this.map = new CreateMap();
     this.player = null;
     this.redGhost = null;
-    this.blueGhost = null;
+    this.pinkGhost = null;
     this.orangeGhost = null;
     this.score = 0;
     this.lives = 3;
@@ -14,6 +14,7 @@ class Game
   };
 
 
+
   start() 
   {
     // console.log("START - GAMEJS");
@@ -21,6 +22,8 @@ class Game
     this.player = new Player(this.map.getMap(), this);
     this.player.updatePosition();
     
+    this.playBeginning();
+
     //Create ghost
     this.redGhost = new RedGhost(this.map.getMap(), this);
     this.redGhost.updatePosition();
@@ -36,6 +39,42 @@ class Game
     window.requestAnimationFrame(() => this.gameLoop())
   }
     
+  restartGame()
+  {
+
+  }
+
+  playBeginning()
+  {
+    const beginningAudio = new Audio('./sounds/pacman_beginning.mp3'); 
+    beginningAudio.play();
+  }
+  
+  //Need to adjust chomp audio to not overlap
+  playChomp()
+  {
+    const chompAudio = new Audio('./sounds/pacman_chomp.mp3'); 
+    chompAudio.play();
+  }
+
+  playPacDeath()
+  { if(this.player.collide === true || 
+    this.redGhost.collidePacman === true || 
+    this.pinkGhost.collidePacman === true || 
+    this.orangeGhost.collidePacman === true)
+    {
+      const deadAudio = new Audio('./sounds/pacman_death.mp3'); 
+      deadAudio.play();
+    }
+  }
+
+  playEatGhost()
+  {
+    const eatGhostAudio = new Audio('./sounds/pacman_eatghost.mp3'); 
+    eatGhostAudio.play();
+  }
+
+  
 
   gameLoop() 
   {
@@ -71,6 +110,7 @@ class Game
     this.map.searchMap();
     if(this.map.gameWon === 1)
     {
+      this.playBeginning()
       console.log("YOU WON!");
       this.endGame();
     }
