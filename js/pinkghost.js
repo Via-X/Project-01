@@ -1,10 +1,10 @@
-class RedGhost {
+class PinkGhost {
   constructor(map, game) 
   {
     this.game = game;
     this.map = map;
     this.projectedPosition = [0,0];
-    this.currentPosition = [10,10];
+    this.currentPosition = [10,11];
     this.prevPosition = null;
     this.directionX = 0;
     this.directionY = 0;
@@ -17,6 +17,7 @@ class RedGhost {
     // this.direction = 4  - Move down
      
   }
+
 
 
   generateGhostMove()
@@ -67,9 +68,9 @@ class RedGhost {
 
           if(this.didCollide())
           {
-            if(this.game.superPacman[0])
+            if(this.game.superPacman[1])
             {
-              this.game.resetRedGhost();
+              this.game.resetPinkGhost();
             } else
             {
               this.game.reset();
@@ -89,12 +90,12 @@ class RedGhost {
         {
           this.directionX = 0;
           this.directionY = 0;
-          
+  
           if(this.didCollide())
           {
-            if(this.game.superPacman[0])
+            if(this.game.superPacman[1])
             {
-              this.game.resetRedGhost();
+              this.game.resetPinkGhost();
             } else
             {
               this.game.reset();
@@ -103,7 +104,6 @@ class RedGhost {
           {
             this.currentPosition[1] = this.currentPosition[1] + 1;
             this.updatePosition();
-  
           }
         }
         break;
@@ -122,9 +122,9 @@ class RedGhost {
 
           if(this.didCollide())
           {
-            if(this.game.superPacman[0])
+            if(this.game.superPacman[1])
             {
-              this.game.resetRedGhost();
+              this.game.resetPinkGhost();
             } else
             {
               this.game.reset();
@@ -147,9 +147,9 @@ class RedGhost {
 
           if(this.didCollide())
           {
-            if(this.game.superPacman[0])
+            if(this.game.superPacman[1])
             {
-              this.game.resetRedGhost();
+              this.game.resetPinkGhost();
             } else
             {
               this.game.reset();
@@ -172,28 +172,28 @@ class RedGhost {
     //Check Block to the Left
     if(this.map[this.currentPosition[0]][this.currentPosition[1] - 1] === 2 )
     {
-      console.log("RED GHOST Collided Left");
+      console.log("PINK GHOST Collided Left");
       this.collidePacman = true;
     }
 
     //Check Block to the Right
     if(this.map[this.currentPosition[0]][this.currentPosition[1] + 1] === 2 )
     {
-      console.log("RED GHOST Collided Right");
+      console.log("PINK GHOST Collided Right");
       this.collidePacman = true;
     }
 
     //Check Block Above
     if(this.map[this.currentPosition[0] - 1][this.currentPosition[1]] === 2 )
     {
-      console.log("RED GHOST Collided Above");
+      console.log("PINK GHOST Collided Above");
       this.collidePacman = true;
     }
 
     //Check Block Below
     if(this.map[this.currentPosition[0] + 1][this.currentPosition[1]] === 2 )
     {
-      console.log("RED GHOST Collided Below");
+      console.log("PINK GHOST Collided Below");
       this.collidePacman = true;
     }
 
@@ -205,20 +205,19 @@ class RedGhost {
     this.map[this.currentPosition[0]][this.currentPosition[1]] = 3;
     const displayPac = document.getElementById(`${this.currentPosition[0]}-${this.currentPosition[1]}`);
     const image = document.createElement('img');
-    if(this.game.superPacman[0])
+    if(this.game.superPacman[1])
     {
       console.log("scared red actived");
       image.src = "./images/scared-ghost.gif";
     } else 
     {
-      image.src = "./images/red-ghost.gif";
+      image.src = "./images/pink-ghost.gif";
     }
     image.classList.add('red-ghost');
     displayPac.appendChild(image);
     
     if(this.prevPosition)
     {
-
        const removeGhost = document.getElementById(`${this.prevPosition[0]}-${this.prevPosition[1]}`);
        const image = removeGhost.querySelector('img');
       

@@ -7,7 +7,7 @@ class CreateMap
       [8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],
       [8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,8],
       [8,1,8,8,8,1,8,8,8,1,8,1,8,8,8,1,8,8,8,1,8],
-      [8,1,8,1,1,1,8,8,8,1,8,1,8,8,8,1,1,1,8,1,8],
+      [8,1,8,11,1,1,8,8,8,1,8,1,8,8,8,1,1,11,8,1,8],
       [8,1,8,1,8,1,8,1,1,1,1,1,1,1,8,1,8,1,8,1,8],
       [8,1,1,1,8,1,1,1,8,8,8,8,8,1,1,1,8,1,1,1,8],
       [8,1,8,1,1,1,8,1,1,1,8,1,1,1,8,1,1,1,8,1,8],
@@ -21,7 +21,7 @@ class CreateMap
       [8,1,8,8,8,8,1,8,1,1,8,1,1,8,1,8,8,8,8,1,8],
       [8,1,1,1,8,1,1,8,8,1,8,1,8,8,1,1,8,1,1,1,8],
       [8,1,8,1,8,1,8,8,8,1,1,1,8,8,8,1,8,1,8,1,8],
-      [8,1,8,1,1,1,1,1,8,8,1,8,8,1,1,1,1,1,8,1,8],
+      [8,1,8,11,1,1,1,1,8,8,1,8,8,1,1,1,1,11,8,1,8],
       [8,1,8,8,8,8,8,1,8,8,1,8,8,1,8,8,8,8,8,1,8],
       [8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,8],
       [8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8]
@@ -31,10 +31,11 @@ class CreateMap
     this.gameWon = 0;
     // this.wall = 8;
     // this.food = 1;
+    // this.start = 11;
     // this.pacMan = 2;
     // this.redGhost = 3;
-    // this.blueGhost = 6;
-    // this.orangeGhost = 9;
+    // this.blueGhost = 4;
+    // this.orangeGhost = 5;
   }
 
   displayMap()
@@ -55,10 +56,6 @@ class CreateMap
         {
           mapBlock.style.backgroundColor = 'blue';
           mapBlock.classList.add('map-wall-block');
-          
-          // const image = document.createElement('img');
-          // image.src = "./images/pac-man-right.png";
-          // mapBlock.appendChild(image);
         } 
         else if (this.map[row][col] === 2) 
         {
@@ -69,8 +66,12 @@ class CreateMap
         } 
         else if (this.map[row][col] === 1)
         {
-          // this.pointsCount++;
           mapBlock.classList.add('map-dot-block');
+        }
+        else if (this.map[row][col] === 11)
+        {
+          // this.pointsCount++;
+          mapBlock.classList.add('star');
         }
         mapBoard.appendChild(mapBlock);
       }

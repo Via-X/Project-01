@@ -8,7 +8,7 @@ class OrangeGhost {
     this.prevPosition = null;
     this.directionX = 0;
     this.directionY = 0;
-    this.collide = false;
+    this.collidePacman = false;
 
     // this.direction = 0  - Stay in place
     // this.direction = 1  - Move left 
@@ -18,13 +18,7 @@ class OrangeGhost {
      
   }
 
-  // generateGhosts()
-  // {
-  //   this.updatePosition(this.currentPosition);
-  //   //randomize x,y code here
-  //   // setInterval(this.generateMove(), 10);
 
-  // }
 
   generateGhostMove()
   {
@@ -65,48 +59,51 @@ class OrangeGhost {
     {
       case -1:
         // console.log("Move Left - Ghost");
-        if(this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 0)
+        if(this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 0 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 1 ||
+          this.map[this.currentPosition[0]][this.currentPosition[1]-1] === 11 )
         {
           this.directionX = 0;
           this.directionY = 0;
 
-          // this.projectedPosition[0] = this.currentPosition[0];
-          // this.projectedPosition[1] = this.currentPosition[1] -1;
-          // console.log(this.currentPosition + "MOVE GhostJS");
           if(this.didCollide())
           {
-            console.log("GHOST - COLLIDE");
-            this.game.reset();
-            // break; 
+            if(this.game.superPacman[2])
+            {
+              this.game.resetOrangeGhost();
+            } else
+            {
+              this.game.reset();
+            }
           } else 
           {
-            // this.prevPosition = [...this.currentPosition];
             this.currentPosition[1] = this.currentPosition[1] -1;
             this.updatePosition();
-            // this.prevPosition = [...this.currentPosition];
           }
         }
         break;
       case 1:
         // console.log("Move Right - GhostJS");
-        if(this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 0)
+        if(this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 0 || 
+          this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 1 ||
+          this.map[this.currentPosition[0]][this.currentPosition[1]+1] === 11 )
         {
           this.directionX = 0;
           this.directionY = 0;
           
-          // this.projectedPosition[0] = this.currentPosition[0];
-          // this.projectedPosition[1] = this.currentPosition[1] + 1;
-          // console.log(this.currentPosition + "MOVE GhostJS");
           if(this.didCollide())
           {
-            console.log("GHOST - COLLIDE");
-            this.game.reset();
-            // break;
-          } else {
-            // this.prevPosition = [...this.currentPosition];
+            if(this.game.superPacman[2])
+            {
+              this.game.resetOrangeGhost();
+            } else
+            {
+              this.game.reset();
+            }
+          } else 
+          {
             this.currentPosition[1] = this.currentPosition[1] + 1;
             this.updatePosition();
-            // this.prevPosition = [...this.currentPosition];
           }
         }
         break;
@@ -116,49 +113,51 @@ class OrangeGhost {
     {
       case -1:
         // console.log("Move UP - GhostJS");
-        if(this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 0)
+        if(this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 0 || 
+          this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 1 ||
+          this.map[this.currentPosition[0]-1][this.currentPosition[1]] === 11 )
         {
           this.directionX = 0;
           this.directionY = 0;
 
-          // this.projectedPosition[1] = this.currentPosition[1];
-          // this.projectedPosition[0] = this.currentPosition[0] -1;
-          // console.log(this.currentPosition + "MOVE GhostJS");
           if(this.didCollide())
           {
-            console.log("GHOST - COLLIDE");
-            this.game.reset();
-            // break; 
+            if(this.game.superPacman[2])
+            {
+              this.game.resetOrangeGhost();
+            } else
+            {
+              this.game.reset();
+            }
           } else 
           {
-            // this.prevPosition = [...this.currentPosition];
             this.currentPosition[0] = this.currentPosition[0] -1;
             this.updatePosition();
-            // this.prevPosition = [...this.currentPosition];
           }
         }
         break;
       case 1:
         // console.log("Move Down - GhostJS");
-        if(this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 0)
+        if(this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 0 || 
+          this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 1 ||
+          this.map[this.currentPosition[0]+1][this.currentPosition[1]] === 11 )
         {
           this.directionX = 0;
           this.directionY = 0;
 
-          // this.projectedPosition[1] = this.currentPosition[1];
-          // this.projectedPosition[0] = this.currentPosition[0] + 1;
-          // console.log(this.currentPosition + "MOVE GhostJS");
           if(this.didCollide())
           {
-            console.log("GHOST - COLLIDE");
-            this.game.reset();
-            break; 
+            if(this.game.superPacman[2])
+            {
+              this.game.resetOrangeGhost();
+            } else
+            {
+              this.game.reset();
+            }
           } else 
           {
-            // this.prevPosition = [...this.currentPosition];
             this.currentPosition[0] = this.currentPosition[0] + 1;
             this.updatePosition();
-            // this.prevPosition = [...this.currentPosition];
           }
         }
         break;
@@ -171,118 +170,70 @@ class OrangeGhost {
   didCollide() 
   {
     //Check Block to the Left
-    if(
-      this.map[this.currentPosition[0]][this.currentPosition[1] - 1] === 2 //|| 
-      // this.map[this.projectedPosition[0]][this.currentPosition[1]] === 2
-      // (
-      //   this.currentPosition[0] - 3 < 21 && 
-      //   this.currentPosition[0] - 3 >= 0 &&  
-      //   this.currentPosition[1] < 21 && 
-      //   this.currentPosition[1] >= 0 && 
-      //   this.map[this.currentPosition[0]][this.currentPosition[1] - 2] === 2
-      // )
-      )
+    if(this.map[this.currentPosition[0]][this.currentPosition[1] - 1] === 2 )
     {
-      console.log("GHOST Collided Left");
-      this.collide = true;
-      // return this.collide;
+      console.log("ORANGE GHOST Collided Left");
+      this.collidePacman = true;
     }
 
     //Check Block to the Right
-    if(
-      this.map[this.currentPosition[0]][this.currentPosition[1] + 1] === 2  //||
-      // this.map[this.currentPosition[0]][this.currentPosition[1]] === 2
-      // (
-      //   this.currentPosition[0] < 21 &&
-      //   this.currentPosition[0] >= 0 &&  
-      //   this.currentPosition[1] + 3 < 21 && 
-      //   this.currentPosition[1] + 3 >= 0  && 
-      //   this.map[this.currentPosition[0]][this.currentPosition[1] + 2] === 2
-      // )
-      )
+    if(this.map[this.currentPosition[0]][this.currentPosition[1] + 1] === 2 )
     {
-      console.log("GHOST Collided Right");
-      this.collide = true;
-      // return this.collide;
+      console.log("ORANGE GHOST Collided Right");
+      this.collidePacman = true;
     }
 
     //Check Block Above
-    if(
-      this.map[this.currentPosition[0] - 1][this.currentPosition[1]] === 2 //||
-      // this.map[this.currentPosition[0]][this.currentPosition[1]] === 2
-      // (
-      //   this.currentPosition[0] - 3 < 21 && 
-      //   this.currentPosition[0] - 3 >= 0 &&  
-      //   this.currentPosition[1] < 21 && 
-      //   this.currentPosition[1] >= 0  && 
-      //   this.map[this.currentPosition[0] - 2][this.currentPosition[1]] === 2
-      // )
-      )
+    if(this.map[this.currentPosition[0] - 1][this.currentPosition[1]] === 2 )
     {
-      console.log("GHOST Collided Above");
-      this.collide = true;
-      // return this.collide;
+      console.log("ORANGE GHOST Collided Above");
+      this.collidePacman = true;
     }
 
     //Check Block Below
-    if(
-      this.map[this.currentPosition[0] + 1][this.currentPosition[1]] === 2 //||
-      // this.map[this.currentPosition[0]][this.currentPosition[1]] === 2
-      // (
-      //   this.currentPosition[0] < 21 && 
-      //   this.currentPosition[0] >= 0 &&  
-      //   this.currentPosition[1] + 3 < 21 && 
-      //   this.currentPosition[1] + 3 >= 0 && 
-      //   this.map[this.currentPosition[0] + 2][this.currentPosition[1]] === 2
-      // )
-      )
+    if(this.map[this.currentPosition[0] + 1][this.currentPosition[1]] === 2 )
     {
-      console.log("GHOST Collided Below");
-      this.collide = true;
-      // return this.collide;
+      console.log("ORANGE GHOST Collided Below");
+      this.collidePacman = true;
     }
 
-    return this.collide;
+    return this.collidePacman;
   }
 
   updatePosition() 
   {
 
-    // this.map[mapCords[0]][mapCords[1]] = 3;
-    // const displayPac = document.getElementById(`${mapCords[0]}-${mapCords[1]}`);
-    // const image = document.createElement('img');
-    // image.src = "./images/red-ghost-running.gif";
-    // image.classList.add('red-ghost');
-    // displayPac.appendChild(image);
-    
-
-
-    // if(prevCords[0] !== 0 && prevCords[1] !== 0)
-    // {
-    //    this.map[prevCords[0]][prevCords[1]] = 0;
-    //    const removeGhost = document.getElementById(`${prevCords[0]}-${prevCords[1]}`);
-    //    const image = removeGhost.querySelector('img');
-    //    console.log(removeGhost);
-    //    removeGhost.removeChild(image);
-
-    // }
-
-    this.map[this.currentPosition[0]][this.currentPosition[1]] = 3;
+    this.map[this.currentPosition[0]][this.currentPosition[1]] = 9;
     const displayPac = document.getElementById(`${this.currentPosition[0]}-${this.currentPosition[1]}`);
     const image = document.createElement('img');
-    image.src = "./images/red-ghost-running.gif";
+    if(this.game.superPacman[2])
+    {
+      console.log("scared red actived");
+      image.src = "./images/scared-ghost.gif";
+    } else 
+    {
+      image.src = "./images/orange-ghost.gif";
+    }
     image.classList.add('red-ghost');
     displayPac.appendChild(image);
     
     if(this.prevPosition)
-    {
-       this.map[this.prevPosition[0]][this.prevPosition[1]] = 0;
+    {    
        const removeGhost = document.getElementById(`${this.prevPosition[0]}-${this.prevPosition[1]}`);
        const image = removeGhost.querySelector('img');
-      //  console.log(removeGhost);
+      
+       if (removeGhost.classList.contains("map-dot-block"))
+       {
+        this.map[this.prevPosition[0]][this.prevPosition[1]] = 1;
+       } else if( removeGhost.classList.contains("star"))
+       {
+        this.map[this.prevPosition[0]][this.prevPosition[1]] = 11;
+       } else 
+       {
+        this.map[this.prevPosition[0]][this.prevPosition[1]] = 0;
+       }
        removeGhost.removeChild(image);
      
-
     }
     this.prevPosition = [...this.currentPosition];
   }

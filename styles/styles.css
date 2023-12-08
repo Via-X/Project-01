@@ -4,6 +4,7 @@ h1
   font-family: comic sans MS;
   font-size: 500%;
   color: Orange;
+  padding-bottom: 5%;
  
 }
 
@@ -34,6 +35,16 @@ h1
   position: absolute;
 } 
 
+.star
+{
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  background-image: radial-gradient(yellow 30%, transparent 0);
+  position: absolute;
+}  
+
+
 .map-wall-block 
 {
   width: 40px;
@@ -63,7 +74,10 @@ h1
 body 
 {
   display: felx;
+  background-color: black;
   justify-content: center;
   text-align: center;
+  border-color: white;
+  border: 3px solid;
 
 }
