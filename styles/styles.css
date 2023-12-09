@@ -155,3 +155,15 @@ body
   width: 640px;
   height: 640px;
 }
+
+#instructions
+{
+  padding-top: 60px;
+  display: flex;
+  flex-flow: column;
+  color: orange;
+  justify-content: center;
+  align-items: center;
+  font-family: comic sans MS; 
+  text-align: left;
+}

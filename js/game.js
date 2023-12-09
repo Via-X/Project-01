@@ -15,6 +15,7 @@ class Game
     this.delta = 0;
   };
 
+
   updateLives()
   {
     const score = document.getElementById("lives");
@@ -27,6 +28,7 @@ class Game
     const points = document.getElementById("score");
     score.textContent = `Score: ${this.points}`;
   }
+
 
   start() 
   {
@@ -52,19 +54,22 @@ class Game
     // Start the game loop
     window.requestAnimationFrame(() => this.gameLoop())
   }
-    
+  
+  
   playBeginning()
   {
     const beginningAudio = new Audio('./sounds/pacman_beginning.mp3'); 
     beginningAudio.play();
   }
   
+
   //Need to adjust chomp audio to not overlap
   playChomp()
   {
     const chompAudio = new Audio('./sounds/pacman_chomp.mp3'); 
     chompAudio.play();
   }
+
 
   playPacDeath()
   { if(this.player.collide === true || 
@@ -77,6 +82,7 @@ class Game
     }
   }
 
+
   playEatGhost()
   {
     const eatGhostAudio = new Audio('./sounds/pacman_eatghost.mp3'); 
@@ -84,7 +90,6 @@ class Game
   }
 
   
-
   gameLoop() 
   {
     // console.log("GAMELOOP - GAMEJS");
@@ -97,7 +102,6 @@ class Game
   }
   
   
-
   update() 
   {
     this.player.move();
@@ -133,8 +137,7 @@ class Game
       this.playBeginning()
       console.log("YOU WON!");
       this.endGame();
-    }
-   
+    } 
   }
   
 
@@ -162,6 +165,7 @@ class Game
     this.points += 30;
   }
 
+
   resetPinkGhost()
   {
     this.pinkGhost.collidePacman = false;
@@ -170,6 +174,7 @@ class Game
     this.superPacman[1] = false;
     this.points += 40;
   }
+
 
   resetOrangeGhost()
   {
@@ -180,6 +185,7 @@ class Game
     this.points += 50;
   }
 
+  
   endGame() 
   {
     const fin = document.getElementById('map-container');

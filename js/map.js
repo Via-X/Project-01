@@ -38,6 +38,7 @@ class CreateMap
     // this.orangeGhost = 5;
   }
 
+  
   displayMap()
   {
     // console.log("diplayMap called - map js");
@@ -79,10 +80,12 @@ class CreateMap
     // console.log(`Total Point to obtain: ${this.pointsCount}`);
   }
 
+
   getMap()
   {
     return this.map;
   }
+
 
   searchMap()
   {

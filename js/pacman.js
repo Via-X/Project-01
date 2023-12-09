@@ -11,13 +11,12 @@ class Player {
     this.collide = false;
    
    
-    this.pacFacing = 2;
-    // 1 Up, 2 Right, 3 Down, 4 Left  
+    this.pacFacing = 2;       // 1 Up, 2 Right, 3 Down, 4 Left  
   }
+
 
   move() 
   {
-
     switch (this.directionX) 
     {
       case -1:
@@ -142,14 +141,11 @@ class Player {
             this.updatePosition();
      
           }
-        }
-        
+        }      
         break;
     }
-    
-
-
   }
+
 
   didCollide() 
   {
