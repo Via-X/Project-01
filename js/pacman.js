@@ -9,7 +9,10 @@ class Player {
     this.directionX = 0;
     this.directionY = 0;
     this.collide = false;
-     
+   
+   
+    this.pacFacing = 2;
+    // 1 Up, 2 Right, 3 Down, 4 Left  
   }
 
   move() 
@@ -40,7 +43,9 @@ class Player {
               this.game.superPacman = [true, true, true];
             }
             this.currentPosition[1] = this.currentPosition[1] -1;
+            this.pacFacing = 4;
             this.updatePosition();
+
           }
         }
         break;
@@ -69,6 +74,7 @@ class Player {
             }
 
             this.currentPosition[1] = this.currentPosition[1] + 1;
+            this.pacFacing = 2;
             this.updatePosition();     
           }
         }    
@@ -101,6 +107,7 @@ class Player {
             }
     
             this.currentPosition[0] = this.currentPosition[0] -1;
+            this.pacFacing = 1;
             this.updatePosition();
     
           }
@@ -131,6 +138,7 @@ class Player {
             } 
      
             this.currentPosition[0] = this.currentPosition[0] + 1;
+            this.pacFacing = 3;
             this.updatePosition();
      
           }
@@ -188,11 +196,37 @@ class Player {
   {
     this.game.playChomp();
     this.map[this.currentPosition[0]][this.currentPosition[1]] = 2;
+    
     const displayPac = document.getElementById(`${this.currentPosition[0]}-${this.currentPosition[1]}`);
     const image = document.createElement('img');
     image.src = "./images/pac-man-eating.gif";
     image.classList.add('pac-man');
+
+
+    // const direction = document.getElementsByClassName('pac-man');
+    switch (this.pacFacing)
+    {
+      case 1:   
+        image.style.transform = 'rotate(270deg)';
+        break;
+      case 2:
+        console.log("Already facing Right");
+        break;
+      case 3:
+        image.style.transform = 'rotate(90deg)';
+        break;
+      case 4:
+        image.style.transform = 'scaleX(-1)';
+        break;
+      default:
+        console.log("pacFacing value not matched" + this.pacFacing);
+    }
+    console.log(this.pacFacing);
     displayPac.appendChild(image);
+
+    this.pacFacing = 0;
+    
+    this.game.moves += 1;
    
 
     if(this.prevPosition)

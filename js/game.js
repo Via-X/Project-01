@@ -11,9 +11,22 @@ class Game
     this.gameIsOver = false;
     this.points = 0;
     this.superPacman = [false, false, false];
+    this.moves = 0;
+    this.delta = 0;
   };
 
+  updateLives()
+  {
+    const score = document.getElementById("lives");
+    score.textContent = `Lives: ${this.lives}`;
+  }
 
+
+  updateScore()
+  {
+    const points = document.getElementById("score");
+    score.textContent = `Score: ${this.points}`;
+  }
 
   start() 
   {
@@ -22,9 +35,10 @@ class Game
     this.player = new Player(this.map.getMap(), this);
     this.player.updatePosition();
     
+    //Plays Audio - Start of Game.
     this.playBeginning();
 
-    //Create ghost
+    //Create ghosts
     this.redGhost = new RedGhost(this.map.getMap(), this);
     this.redGhost.updatePosition();
 
@@ -33,17 +47,12 @@ class Game
 
     this.orangeGhost = new OrangeGhost(this.map.getMap(), this);
     this.orangeGhost.updatePosition();
-    // setInterval(, 1);
+
 
     // Start the game loop
     window.requestAnimationFrame(() => this.gameLoop())
   }
     
-  restartGame()
-  {
-
-  }
-
   playBeginning()
   {
     const beginningAudio = new Audio('./sounds/pacman_beginning.mp3'); 
@@ -93,13 +102,24 @@ class Game
   {
     this.player.move();
     //Crea a new Ghost
+    if (this.delta == 3)
+    {
+        this.redGhost.generateGhostMove();
 
-    this.redGhost.generateGhostMove();
-
-    //Set timer to delay start <HERE>
-    this.pinkGhost.generateGhostMove()
-    this.orangeGhost.generateGhostMove()
-  
+        //Set timer to delay start <HERE>
+        if(this.moves >= 60)
+        {
+          this.pinkGhost.generateGhostMove();
+        }
+        if(this.moves >= 120)
+        {
+          this.orangeGhost.generateGhostMove();
+        }
+        this.delta = 0;
+    }
+    this.updateLives();
+    this.updateScore();
+    this.delta += 1;
 
     //if lives are 0
     if(this.lives === 0)
@@ -162,6 +182,26 @@ class Game
 
   endGame() 
   {
+    const fin = document.getElementById('map-container');
+    fin.innerHTML = "";
+    const image = document.createElement('img');
+    if(this.map.gameWon === 1)
+    {
+      image.src = './images/youwin.gif';
+    } else 
+    {
+      image.src = './images/gameover_typed.gif';
+    }
+   
+    image.classList.add('gameover');
+    fin.appendChild(image);
+
+    const startButton = document.getElementById('start-button');
+    const restartButton = document.getElementById('restart-button');
+    startButton.style.display = 'none';
+    restartButton.style.display = 'block';
+
+
     this.gameIsOver = true;
     console.log(this.map);
   }

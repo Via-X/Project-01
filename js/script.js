@@ -1,7 +1,7 @@
 window.onload = function () 
 {
   const startButton = document.getElementById("start-button");
-  // const restartButton = document.getElementById("restart-button");
+  const restartButton = document.getElementById("restart-button");
   let game;
 
   startButton.addEventListener("click", function () 
@@ -9,21 +9,24 @@ window.onload = function ()
     startGame();
   });
 
-  // restartButton.addEventListener("click", function () {
-  //   // Call the restartGame function when the button is clicked
-  //   restartGame();
-  // });
+  restartButton.addEventListener("click", function () 
+  {
+    restartGame();
+  });
 
   function startGame() 
   {
-    // console.log("start game - script js");
     game = new Game();
     game.start();
-
   }
 
-  // The function that reloads the page to start a new game
- 
+
+  function restartGame() 
+  {
+    game = new Game();
+    game.start();
+  }
+  
 
   // Function that handles keydown event
   function handleKeydown(event) 
